@@ -12,7 +12,7 @@
 
 #### 二、react
 1. [react生命周期](#react)
-1. [react-router实现原理、钩子、如何自己实现一个](#router)
+2. [react-router实现原理、钩子、如何自己实现一个](#router)
 3. [redux实现原理如何自己实现一个](#redux)
 4. [react优化](#react-optimize)
 5. [首屏渲染白屏原因如何优化](#first-screen)
@@ -23,9 +23,13 @@
 8. [setState，是同步还是异步，调用后发生了什么](#)
 10. [谈谈虚拟dom和diff算法、为什么react说虚拟dom可以提高性能](#)
 11. [react refs是干嘛的](#)
-12. [react refs是干嘛的](#)
-13. [react 有几种构建组件方式，分别是？ ](#)
-8. [webpack配置](#webpack)
+12. [说下hoc是什么，你用过吗，如何用](#)
+13. [react 有几种构建组件方式，分别是？](#)
+14. [react 组件 传递数据有哪些方式？](#react-14)
+15. [如何做页面样式切换（主题）](#)
+16. [render函数中return如果没有使用()会有什么问题](#)
+17. [有用过React的插槽(Portals)吗？怎么用？](#)
+18. [webpack配置](#webpack)
  
 
 #### 三、第三方库
@@ -74,7 +78,7 @@
     ###### 错误处理:
     * static getDerivedStateFromError()
     * componentDidCatch()
-
+14. ##### <span id="react-14">react 组件 传递数据有哪些方式？</span>
 
 
 
