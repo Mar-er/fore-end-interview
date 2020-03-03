@@ -1,14 +1,19 @@
 ## 目录
-#### 一、js
+#### 一、js、css
 1. [原型链相关](#prototype)
-1. [es6新特性，使用过那些方法](#es6)
-1. [Map与object有什么区别](#map)
-3. [判断类型的方法有哪些](#indexOf)
-4. [闭包](#closure)
-5. [js事件循环、宏任务和微任务，执行顺序有差别，定时器与异步函数的优先级，setTimeout(fn, 0)原理](#eventLoop)
-6. [promise、generator、async await](#)
-7. [箭头函数与普通函数的区别](#)
-8. [== 和 === 区别](#)
+2. [es6新特性，使用过那些方法](#es6)
+3. [Map与object有什么区别](#map)
+4. [判断类型的方法有哪些](#indexOf)
+5. [闭包](#closure)
+6. [js事件循环、宏任务和微任务，执行顺序有差别，定时器与异步函数的优先级，setTimeout(fn, 0)原理](#eventLoop)
+7. [promise、generator、async await](#)
+8. [箭头函数与普通函数的区别](#)
+9. [== 和 === 区别](#)
+10. [密码必须匹配一个大写一个小写字母，至少6位数字 ，正则思路应该 如何 考虑和设计](#)
+11. [react router 如何做到单页面刷新（实现），例如你修改路由路径，并不会造成页面重新刷新是如何做到的，关键点是 h5 histroy和hash router](#)
+12. [你如何做浏览器缓存 ，例如你给资源文件加了hash码 和版本号，但index.html文件可能还是使用了之前的缓存文件，你应该如何解决，关键字强缓存和弱缓存](#)
+13. [JS模块话原理（AMD和CMD，import和export）](#)
+14. [CSS的BFC](#)
 
 #### 二、react
 1. [react生命周期](#react)
@@ -30,6 +35,9 @@
 16. [render函数中return如果没有使用()会有什么问题](#)
 17. [有用过React的插槽(Portals)吗？怎么用？](#)
 18. [webpack配置](#webpack)
+19. [redux-saga 应用](#)
+20. [webpack loader 原理，写过啥插件](#)
+
  
 
 #### 三、第三方库
@@ -79,17 +87,73 @@
     * static getDerivedStateFromError()
     * componentDidCatch()
 14. ##### <span id="react-14">react 组件 传递数据有哪些方式？</span>
-
+    * 父传子通过props传递
+    * 子传夫通过回调函数传递
+    * 兄弟组件 1.订阅发布 2.将状态传给父级然后在通过props传给兄弟
 
 
 1. ##### <span id="router">react-router实现原理、钩子、如何自己实现一个</span>
 1. ##### <span id="redux">redux实现原理如何自己实现一个</span>
-1. ##### <span id="react-optimize">react优化</span>
+1. ##### <span id="react-optimize">react优化</span>[参考](https://zhuanlan.zhihu.com/p/74229420)
+    
+    从三个方面来优化：
+    * 减少渲染节点/降低渲染计算量
+        * 不要在渲染函数进行数组排序、数据转换、订阅事件、创建事件处理器等，渲染函数中不应该放置太多副作用。
+        * 减少不必要的嵌套
+        * 使用虚拟列表库，比如react-window
+        * 惰性渲染，比如tab选项卡，只需要渲染当前tab项，其他不用渲染。
+        * 选择合适的样式方案，比如css > 大部分css-in-js > inline style
+    * 避免重复渲染
+        * 优化props 如果一个组件props过于复杂则意味着它违背了“单一职责”原理
+        * 不可变事件处理器，不要再组件上书写函数，应该先定义好函数然后传递函数。对于hook可以使用useCallback包裹。
+        * 使用不可变数据，比如immer、immutable等。
+        * 使用 recompose 精细化比对
+    * 精细化渲染
+        * 组件尽可能拆分小一点，遵守“单一职责”不要编写大而全的组件。
+        * 不要滥用context
+
+    * 使用虚拟化长列表，比如react-window、react-virtualized
+    * 使用更小的图像
+    * 使用shouldComponentUpdate
+    * 使用不变的事件处理器
+    * 使用不可变数据
+    * 优化Redux避免过度存储状态，比如如果将input写为受控组件输入比较多时在低端设备上输入会有延迟。
+
 1. ##### <span id="first-screen">首屏渲染白屏原因如何优化</span>
+    
+    解决方案：
+    * webpack分包、使用cdn、按需加载、路由懒加载
+    * 骨架屏
+    * 服务端渲染
+
 1. ##### <span id="hook">hook、hook与函数组件有什么区别</span>
+    ###### Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性。
+    
+    ###### 基础 Hook
+    * useState
+    * useEffect
+    * useContext
+    ###### 额外的 Hook
+    - useReducer
+    - useCallback
+    - useMemo
+    - useRef
+    - useImperativeHandle
+    - useLayoutEffect
+    - useDebugValue
+
+
 1. ##### <span id="pure">component与pureComponent区别如果使用immer pureComponent会进行比较吗</span>
+    pureComponent 通过浅比较state和props复写shouldComponentUpdate
+
 1. ##### <span id="component">封装过那些组件，需要考虑什么问题</span>
+
+
 1. ##### <span id="ssr">ssr服务端渲染好处及实现原理、是否听说过serverless简单介绍</span>
+    * 好处：减少首屏白屏时间、seo优化
+    * 原理：node server 接收客户端请求，得到当前的req url path,然后在已有的路由表内查找到对应的组件，拿到需要请求的数据，将数据作为 props
+、context或者store 形式传入组件，然后基于 react 内置的服务端渲染api renderToString() or renderToNodeStream() 把组件渲染为 html字符串或者 stream 流, 在把最终的 html 进行输出前需要将数据注入到浏览器端(注水)，server 输出(response)后浏览器端可以得到数据(脱水)，浏览器开始进行渲染和节点对比，然后执行组件的componentDidMount 完成组件内事件绑定和一些交互，浏览器重用了服务端输出的 html 节点，整个流程结束。
+
 1. ##### <span id="webpack">webpack配置</span>
 
 #### 三、第三方库
