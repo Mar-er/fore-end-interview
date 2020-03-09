@@ -59,6 +59,8 @@
 #### 一、js
 1. ##### <span id="prototype">原型链相关</span>
 1. ##### <span id="es6">es6新特性，使用过那些方法、原型链相关</span>
+    const和let、模板字符串、箭头函数、函数的参数默认值、对象和数组解构、
+
 1. ##### <span id="map">Map与object有什么区别</span>
 1. ##### <span id="indexOf">判断类型的方法有哪些</span>
 1. ##### <span id="closure">闭包</span>
@@ -92,8 +94,12 @@
     * 兄弟组件 1.订阅发布 2.将状态传给父级然后在通过props传给兄弟
 
 
-1. ##### <span id="router">react-router实现原理、钩子、如何自己实现一个</span>
+1. ##### <span id="router">react-router实现原理、钩子、如何自己实现一个</span> [参考](https://zhuanlan.zhihu.com/p/44548552#444)
+    原理：定义一个routeMap对象，存放路由与组件的键值对。在dom渲染之后，给window绑定hashchange事件（监听页面hash的变化），并且在state属性中添加route属性，代表当前页面路由。当页面跳转时会触发hashchange事件，通过setState更改route值，并在routeMap中进行匹配重新渲染。
+
 1. ##### <span id="redux">redux实现原理如何自己实现一个</span>
+
+
 1. ##### <span id="react-optimize">react优化</span>[参考](https://zhuanlan.zhihu.com/p/74229420)
     
     从三个方面来优化：
@@ -107,17 +113,11 @@
         * 优化props 如果一个组件props过于复杂则意味着它违背了“单一职责”原理
         * 不可变事件处理器，不要再组件上书写函数，应该先定义好函数然后传递函数。对于hook可以使用useCallback包裹。
         * 使用不可变数据，比如immer、immutable等。
+        * 使用shouldComponentUpdate
         * 使用 recompose 精细化比对
     * 精细化渲染
         * 组件尽可能拆分小一点，遵守“单一职责”不要编写大而全的组件。
         * 不要滥用context
-
-    * 使用虚拟化长列表，比如react-window、react-virtualized
-    * 使用更小的图像
-    * 使用shouldComponentUpdate
-    * 使用不变的事件处理器
-    * 使用不可变数据
-    * 优化Redux避免过度存储状态，比如如果将input写为受控组件输入比较多时在低端设备上输入会有延迟。
 
 1. ##### <span id="first-screen">首屏渲染白屏原因如何优化</span>
     
@@ -166,3 +166,8 @@
 
 #### 五、实战项目
 1. ##### <span id="project">做过什么项目，使用过什么技术栈，讲讲项目中遇到的问题。</span>
+
+1. ##### 前端实现权限控制方案
+    * 通过高阶函数封装react-router，在react-router中进行判断
+    * 封装button点击的时候判断是否登录跳转页面
+    * 自己实现一个类，页面组件继承至这个类（不推荐使用，react不推荐组件继承于自定义的类）
