@@ -3,6 +3,11 @@
 #### **一、BOM与DOM**
 
 1. 浏览器渲染HTML的过程
+2. http 3次握手4次挥手
+3. meta标签是什么
+   meta常用于定义页面的说明，关键字，最后修改日期，和其它的元数据。这些元数据将服务于浏览器（如何布局或重载页面），搜索引擎和其它网络服务。
+4. innerHTML与document.write的区别
+   write是DOM方法,向文档写入HTML表达式或JavaScript代码，可列出多个参数，参数被顺序添加到文档中 ；innerHTML是DOM属性,设置或返回调用元素开始结束标签之间的HTML元素
 
 #### 二、css
 
@@ -26,11 +31,28 @@
 #### 三、js
 
 1. [原型与原型链](#js1)
-   在JavaScript中原型是一个prototype对象，用于表示类型之间的关系。
+   原型是一个prototype对象，用于表示类型之间的关系。
 
-   在JavaScript中是通过prototype对象指向父类对象，直到指向Object对象为止，这样就形成了一个原型指向的链条，专业术语称之为原型链。
+   通过prototype对象指向父类对象，直到指向Object对象为止，这样就形成了一个原型指向链条，称之为原型链。
 2. [new的实际过程是什么]()
+
+   1. 创建一个空对象
+   2. 设置原型，将对象的原型设置为函数的prototype对象
+   3. 让函数的this指向这个对象，执行构造函数的代码（为这个新对象添加属性）
+   4. 返回这个对象
 3. [es6新特性，使用过那些方法](#js2)
+
+   1. 新增symbol类型 表示独一无二的值，用来定义独一无二的对象属性名;
+   2. const/let  都是用来声明变量,不可重复声明，具有块级作用域。存在暂时性死区，也就是不存在变量提升。(const一般用于声明常量);
+   3. 变量的解构赋值(包含数组、对象、字符串、数字及布尔值,函数参数),剩余运算符(...rest);
+   4. 模板字符串(${data});
+   5. 扩展运算符(数组、对象);;
+   6. 箭头函数;
+   7. Set和Map数据结构;
+   8. Proxy/Reflect;
+   9. Promise; async函数;
+   10. Class;
+   11. Module语法(import/export)
 4. [Map、Object、Set有什么区别](#map)
 5. [判断类型的方法有哪些](#js4)
 6. [闭包](#js5)
@@ -56,7 +78,7 @@
 24. [undefault与null区别]
 25. [怎么获取相同的symbol]
 26. [js类型]
-27. []
+27. [基本类型有那些]()
     值类型(基本类型)：字符串（String）、数字(Number)、布尔(Boolean)、对空（Null）、未定义（Undefined）、Symbol
     引用数据类型：对象(Object)、数组(Array)、函数(Function)。
 28. [HTML中缓存有哪些]
@@ -71,6 +93,16 @@
 36. 重排重绘，那些属性会引起重排那些会引起重绘
 37. 更改定位left之后发生了什么
 38. 为什么闭包会引起内存泄漏，函数调用之后变量没有被释放
+39. 如何解决跨域
+40. 变量提升，函数提升、优先级、作用域链
+
+- 变量提升：只有声明被提升，初始化不会被提升、声明会被提升到当前作用域的顶端
+- 函数提升：函数声明和初始化都会被提升、函数表达式不会被提升
+- 函数提升在变量提升之前
+
+41. let、var区别
+    let是块级作用域、let不能重复声明已存在的变量、let不会被提升存在暂存死区
+42. 为什么post请求前先发一个options请求
 
 #### 四、react
 
@@ -97,18 +129,21 @@
 21. [高阶函数如何传递ref](#react21)
 22. [ssr服务端渲染好处及实现原理、是否听说过serverless简单介绍](#ssr)
 23. [为什么需要hooks]()
-24. [函数组件有什么缺点]()
+24. [函数组件优缺点]()
 25. [hooks父组件如何调用子组件]()
     父组件通过useRef获取子组件ref并将ref通过自定义属性传递给子组件，子组件使用useImperativeHandle hooks函数，将ref和函数作为参数进行调用。其中函数返回一个对象，对象中的value为方法，使用forwardRef包裹子组件，在父组件中通过ref.current.方法名调用虚拟
 26. dom一定比操作真实dom高效吗，为什么使用需要虚拟dom
 27. react constroctor 中的super意义
 28. 函数组件与hooks、class组件之间的区别
+29. react监听路由变化
+30. 虚拟dom是什么
 
 #### 五、vue
 
 1. vue双向数据绑定原理
    vue采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty来劫持各个属性的setter，getter，在数据变化时发布消息给订阅者，出发相应的监听回调
 2. vue优化
+3. 缓存组件
 
 #### 六、项目工程化
 
@@ -310,3 +345,122 @@
    * 自己实现一个类，页面组件继承至这个类（不推荐使用，react不推荐组件继承于自定义的类）
 
 https://www.zhipin.com/wenti/w_388a771a2bb0c66etnV90t25E1c~.html
+
+#### 九、参考
+
+[手写实现某些功能](https://github.com/qianlongo/fe-handwriting)
+
+[面试题](https://juejin.cn/post/6989422484722286600)
+
+#### 十、笔试
+
+`function foo(o) { o.url = "baidu.com" o = new Object(); o.url = "google.com" } let webSite = new Object; foo(webSite); console.log(webSite.url);`
+
+`
+function Foo() {
+Foo.a = function(){
+console.log(1)
+}
+this.a = function () {
+console.log(2)
+}
+}
+
+Foo.prototype.a = function() {
+console.log(3)
+}
+Foo.a = function() {
+console.log(4)
+}
+
+Foo.a();
+let obj = new Foo();
+obj.a();
+Foo.a();
+
+console.log(1);
+setTimeout(() => {
+console.log(2);
+new Promise((resolve) => {
+console.log(3);
+resolve();
+}).then(() => {
+console.log(4);
+});
+});
+
+new Promise((resolve) => {
+console.log(5);
+resolve();
+}).then(() => {
+console.log(6);
+});
+
+setTimeout(() => {
+console.log(7);
+new Promise((resolve) => {
+console.log(8);
+resolve();
+}).then(() => {
+console.log(9);
+});
+});
+
+var a = 10;
+(function () {
+console.log(a)
+a =5
+console.log(window.a)
+var a = 20
+console.log(a)
+})()
+
+function side(arr) {
+arr[0] = arr[2];
+}
+function a(a, b, c = 3) {
+c = 10;
+side(arguments);
+return a + b + c;
+}
+a(1, 1, 1);
+
+var fullname = 'a'
+var obj = {
+fullname: 'b',
+prop: {
+fullname: 'c',
+getFullname: function() {
+return this.fullname
+}
+}
+}
+console.log(obj.prop.getFullname());
+var test = obj.prop.getFullname;
+console.log(test())
+
+const person = { name: "Jon" }
+function sayHi(age) {
+return `${this.name} is ${age}`;
+}
+console.log(sayHi.call(person, 21));
+console.log(sayHi.bind(person, 21));
+
+// counter.is
+let counter = 10
+const getCounter = () => {
+console.log(counter)
+}
+const group = {
+counter: counter
+}
+export { counter, getCounter, group }
+
+// index.js
+getCounter()
+import { counter, getCounter, group } from './counter'
+counter += 1
+console. log(counter)
+group.counter += 1
+console.log(group.counter)
+`
