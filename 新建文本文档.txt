@@ -1,0 +1,7 @@
+Hi, I’m Waldron. It’s a pleasure to be here today for the remote interview. I have 8 years of experience in front-end development, primarily based in Shenzhen, China. Throughout my career, I’ve worked across various industries including restaurant SaaS, education, study abroad, and gaming. My expertise includes developing websites, backend management systems, WeChat mini-programs, and mobile H5 sites.
+
+I have extensive experience with technologies such as React, Redux, Redux-Saga, and Next.js. I’ve also worked with React Native and Flutter for app development, and NestJS for backend API development. In my previous role as a Front-End Team Lead, I was responsible for task scheduling, assigning tasks, and assisting with technical issues. I primarily used React to develop management dashboards and NestJS for developing middle-layer APIs.
+
+Currently, I am studying English in Kuala Lumpur. While my English is still limited, I am working hard to improve it. I appreciate your understanding and patience.
+
+Thank you for considering my application. I look forward to discussing how my background and skills align with the needs of your team.
